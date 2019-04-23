@@ -18,8 +18,7 @@
  *******************************************************************************/
 package org.apache.ofbiz.base.collections;
 
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -56,15 +55,14 @@ public class MultivaluedMapContextAdapterTests {
 
     @Test
     public void valuesBasic() {
-        assertThat(adapter.values(), hasItems(0, 3));
-        assertThat(adapter.values().size(), is(2));
+        assertThat(adapter.values(), containsInAnyOrder(0, 3));
     }
 
     @Test
-    public void entrySetBasic() {
+    public void equalityBasic() {
         HashMap<String, Integer> expected = new HashMap<>();
         expected.put("foo", 0);
         expected.put("bar", 3);
-        assertEquals(expected.entrySet(), adapter.entrySet());
+        assertEquals(expected, adapter);
     }
 }

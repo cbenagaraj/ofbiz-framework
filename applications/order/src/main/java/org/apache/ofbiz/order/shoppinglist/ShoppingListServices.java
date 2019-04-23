@@ -171,7 +171,7 @@ public class ShoppingListServices {
 
                     // store the order
                     Map<String, Object> createResp = helper.createOrder(userLogin);
-                    if (createResp == null || (createResp != null && ServiceUtil.isError(createResp))) {
+                    if (createResp == null || ServiceUtil.isError(createResp)) {
                         Debug.logError("Cannot create order for shopping list - " + shoppingList, module);
                     } else {
 
@@ -581,7 +581,7 @@ public class ShoppingListServices {
         LocalDispatcher dispatcher = dctx.getDispatcher();
         GenericValue userLogin = (GenericValue) context.get("userLogin");
         List<GenericValue> shoppingList = null;
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         try {
             shoppingList = EntityQuery.use(delegator).from("ShoppingList").where("partyId", null, "shoppingListTypeId", "SLT_SPEC_PURP").queryList();
         } catch (GenericEntityException e) {

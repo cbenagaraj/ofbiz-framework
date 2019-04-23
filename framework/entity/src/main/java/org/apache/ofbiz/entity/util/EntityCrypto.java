@@ -52,7 +52,7 @@ public final class EntityCrypto {
     public static final String module = EntityCrypto.class.getName();
 
     private final Delegator delegator;
-    private final ConcurrentMap<String, byte[]> keyMap = new ConcurrentHashMap<String, byte[]>();
+    private final ConcurrentMap<String, byte[]> keyMap = new ConcurrentHashMap<>();
     private final StorageHandler[] handlers;
 
     public EntityCrypto(Delegator delegator, String kekText) throws EntityCryptoException {
@@ -325,7 +325,7 @@ public final class EntityCrypto {
         protected String encryptValue(EncryptMethod encryptMethod, byte[] key, byte[] objBytes) throws GeneralException {
             return StringUtil.toHexString(DesCrypt.encrypt(DesCrypt.getDesKey(key), objBytes));
         }
-    };
+    }
 
     protected static final StorageHandler OldFunnyHashStorageHandler = new LegacyStorageHandler() {
         @Override
@@ -432,5 +432,5 @@ public final class EntityCrypto {
             String result = Base64.encodeBase64String(DesCrypt.encrypt(DesCrypt.getDesKey(key), allBytes));
             return result;
         }
-    };
+    }
 }

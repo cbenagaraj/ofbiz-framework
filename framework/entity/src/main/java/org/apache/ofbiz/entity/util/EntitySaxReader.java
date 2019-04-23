@@ -97,7 +97,7 @@ public class EntitySaxReader extends DefaultHandler {
     private boolean createDummyFks = false;
     private boolean checkDataOnly = false;
     private boolean continueOnFail = false;
-    private enum Action {CREATE, CREATE_UPDATE, CREATE_REPLACE, DELETE};
+    private enum Action {CREATE, CREATE_UPDATE, CREATE_REPLACE, DELETE}
     private List<String> actionTags = UtilMisc.toList("create", "create-update", "create-replace", "delete");
     private Action currentAction = Action.CREATE_UPDATE;
     private List<Object> messageList = null;
@@ -161,7 +161,7 @@ public class EntitySaxReader extends DefaultHandler {
 
     public List<Object> getMessageList() {
         if (this.checkDataOnly && this.messageList == null) {
-            messageList = new LinkedList<Object>();
+            messageList = new LinkedList<>();
         }
         return this.messageList;
     }
@@ -322,7 +322,7 @@ public class EntitySaxReader extends DefaultHandler {
                     Template template = new Template("FMImportFilter", templateReader, config);
                     NodeModel nodeModel = NodeModel.wrap(this.rootNodeForTemplate);
 
-                    Map<String, Object> context = new HashMap<String, Object>();
+                    Map<String, Object> context = new HashMap<>();
                     TemplateHashModel staticModels = FreeMarkerWorker.getDefaultOfbizWrapper().getStaticModels();
                     context.put("Static", staticModels);
 

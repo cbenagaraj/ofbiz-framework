@@ -1253,9 +1253,7 @@ public class OrderServices {
                                         Map<String, Object> reserveResult = dispatcher.runSync("reserveStoreInventory", reserveInput);
                                         if (ServiceUtil.isError(reserveResult)) {
                                             String invErrMsg = "The product ";
-                                            if (product != null) {
-                                                invErrMsg += getProductName(product, orderItem);
-                                            }
+                                            invErrMsg += getProductName(product, orderItem);
                                             invErrMsg += " with ID " + orderItem.getString("productId") + " is no longer in stock. Please try reducing the quantity or removing the product from this order.";
                                             resErrorMessages.add(invErrMsg);
                                         }
@@ -2009,7 +2007,7 @@ public class OrderServices {
         LocalDispatcher dispatcher = ctx.getDispatcher();
         Delegator delegator = ctx.getDelegator();
         Locale locale = (Locale) context.get("locale");
-        Map<String, Object> resp = new HashMap<String, Object>();
+        Map<String, Object> resp = new HashMap<>();
         GenericValue userLogin = (GenericValue) context.get("userLogin");
         BigDecimal cancelQuantity = (BigDecimal) context.get("cancelQuantity");
         String orderId = (String) context.get("orderId");
@@ -5984,10 +5982,8 @@ public class OrderServices {
 
         if (rowNumber == null) {
             Long count = EntityQuery.use(delegator).from("OrderItemShipGroupAssoc").where("orderId", orderId, "orderItemSeqId", orderItemSeqId).queryCount();
-            if (count != null) {
-                rowNumber = count.intValue();
-                result.put("rowNumber", rowNumber);
-            }
+            rowNumber = count.intValue();
+            result.put("rowNumber", rowNumber);
         }
 
         //find OISG Assoc
@@ -6099,7 +6095,7 @@ public class OrderServices {
             result.put("totalQuantity", totalQuantity);
 
             //Only for multi service calling and the last row : test if orderItem quantity equals OrderItemShipGroupAssocs quantitys
-            if (rowCount != null && rowNumber != null ) {
+            if (rowCount != null) {
                 int rowCountInt = rowCount;
                 int rowNumberInt = rowNumber;
                 if (rowCountInt == rowNumberInt - 1) {
@@ -6304,7 +6300,7 @@ public class OrderServices {
         String orderId = (String) context.get("orderId");
         OrderReadHelper orh = new OrderReadHelper(delegator, orderId);
         List<GenericValue> orderItems = orh.getOrderItems();
-        Map<String, Object> serviceResult = new HashMap<String, Object>();
+        Map<String, Object> serviceResult = new HashMap<>();
         // In order to improve efficiency a little bit, we will always create the ProductAssoc records
         // with productId < productIdTo when the two are compared.  This way when checking for an existing
         // record we don't have to check both possible combinations of productIds
