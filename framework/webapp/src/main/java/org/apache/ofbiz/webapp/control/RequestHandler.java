@@ -18,12 +18,11 @@
  *******************************************************************************/
 package org.apache.ofbiz.webapp.control;
 
-import java.net.MalformedURLException;
-import org.apache.ofbiz.base.location.FlexibleLocation;
 import static org.apache.ofbiz.base.util.UtilGenerics.checkMap;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.cert.X509Certificate;
 import java.util.Collection;
@@ -43,6 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ofbiz.base.location.FlexibleLocation;
 import org.apache.ofbiz.base.util.Debug;
 import org.apache.ofbiz.base.util.SSLUtil;
 import org.apache.ofbiz.base.util.StringUtil;

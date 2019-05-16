@@ -1168,11 +1168,12 @@ public final class UtilDateTime {
     }
 
     /**
-     * Returns a copy of <code>date</code> that cannot be modified.
+     * Returns a copy of {@code date} that cannot be modified.
      * Attempts to modify the returned date will result in an
-     * <tt>UnsupportedOperationException</tt>.
+     * {@code UnsupportedOperationException}.
      *
-     * @param date
+     * @param date  the date to copy
+     * @return an immutable copy of {@code date}.
      */
     public static Date unmodifiableDate(Date date) {
         if (date instanceof ImmutableDate) {
@@ -1193,31 +1194,37 @@ public final class UtilDateTime {
             return this;
         }
 
+        @Override
         @Deprecated
         public void setYear(int year) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         @Deprecated
         public void setMonth(int month) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         @Deprecated
         public void setDate(int date) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         @Deprecated
         public void setHours(int hours) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         @Deprecated
         public void setMinutes(int minutes) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         @Deprecated
         public void setSeconds(int seconds) {
             throw new UnsupportedOperationException();

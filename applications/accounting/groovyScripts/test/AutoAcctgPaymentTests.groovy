@@ -39,4 +39,29 @@ class AutoAcctgPaymentTests extends GroovyScriptTestCase {
         assert payment.paymentTypeId == 'CUSTOMER_PAYMENT'
         assert payment.paymentMethodTypeId == 'COMPANY_CHECK'
     }
+
+    void testSetPaymentStatus() {
+        Map serviceCtx = [:]
+        serviceCtx.paymentId = '1000'
+        serviceCtx.statusId = 'PAYMENT_AUTHORIZED'
+        serviceCtx.userLogin = EntityQuery.use(delegator).from('UserLogin').where('userLoginId', 'system').cache().queryOne()
+        Map serviceResult = dispatcher.runSync('setPaymentStatus', serviceCtx)
+        assert ServiceUtil.isSuccess(serviceResult)
+
+        GenericValue payment = EntityQuery.use(delegator).from('Payment').where('paymentId', '1000').queryOne()
+        assert payment
+        assert serviceResult.oldStatusId == 'PAYMENT_NOT_AUTH'
+    }
+
+    void testQuickSendPayment() {
+        Map serviceCtx = [:]
+        serviceCtx.paymentId = '1001'
+        serviceCtx.userLogin = EntityQuery.use(delegator).from('UserLogin').where('userLoginId', 'system').cache().queryOne()
+        Map serviceResult = dispatcher.runSync('quickSendPayment', serviceCtx)
+        assert ServiceUtil.isSuccess(serviceResult)
+
+        GenericValue payment = EntityQuery.use(delegator).from('Payment').where('paymentId', '1001').queryOne()
+        assert payment
+        assert payment.statusId == 'PMNT_SENT'
+    }
 }
